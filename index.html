@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas虚拟表格 - 父容器滚动</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .table-wrapper {
+        width: 100%;
+        height: 600px;
+        overflow: auto; /* 关键：父容器滚动 */
+        border: 1px solid #ddd;
+        position: relative;
+      }
+
+      .canvas-container {
+        position: relative;
+        height: 100%;
+      }
+
+      canvas {
+        position: absolute;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        pointer-events: none; /* 让鼠标事件穿透到父容器 */
+      }
+
+      /* 滚动占位元素，用于撑开滚动区域 */
+      .scroll-placeholder {
+        /* position: absolute; */
+        /* top: 0;
+        left: 0; */
+        width: 1px;
+        height: 1px;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .info-bar {
+        margin-top: 10px;
+        padding: 10px;
+        background: #f5f5f5;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      button {
+        margin-right: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Canvas虚拟表格 - 10万+数据（父容器滚动）</h2>
+    <div id="tableWrapper" class="table-wrapper">
+      <div id="canvasContainer" class="canvas-container">
+        <canvas id="tableCanvas"></canvas>
+        <!-- 用于撑开滚动区域的占位元素 -->
+        <div id="scrollPlaceholder" class="scroll-placeholder"></div>
+      </div>
+    </div>
+    <div class="info-bar" id="infoBar">
+      数据量: <span id="dataCount">0</span> 条 | 行高: 35px | 表头: 40px |
+      滚动位置: <span id="scrollPos">0</span>px | 可见行:
+      <span id="visibleRows">0-0</span> | FPS: <span id="fps">-</span>
+    </div>
+
+    <script src="canvas-table.js"></script>
+  </body>
+</html>
